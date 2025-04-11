@@ -20,7 +20,7 @@ formulir.addEventListener("submit", (e) => {
   if (id == "") {
     // Tambah notes
     axios
-      .post(`${BASE_URL}/add-notes`, { Title, Content })
+      .post(`${BASE_URL}add-notes`, { Title, Content })
       .then(() => {
         // bersihin formnya
         elemen_Title.value = "";
@@ -32,7 +32,7 @@ formulir.addEventListener("submit", (e) => {
       .catch((error) => console.log(error.message)); // <- Kalo ada error
   } else {
     axios
-      .put(`${BASE_URL}/edit-notes/${id}`, {  Title, Content })
+      .put(`${BASE_URL}edit-notes/${id}`, {  Title, Content })
       .then(() => {
         // bersihin formnya
         elemen_Title.dataset.id = "";
@@ -49,7 +49,7 @@ formulir.addEventListener("submit", (e) => {
 // GET 
 async function getNotes() {
   try {
-    const { data } = await axios.get(`${BASE_URL}/notes`);
+    const { data } = await axios.get(`${BASE_URL}notes`);
 
     const table = document.querySelector("#table-notes");
     let tampilan = "";
@@ -86,7 +86,7 @@ function hapusNotes() {
     btn.addEventListener("click", () => {
       const id = btn.dataset.id;
       axios
-        .delete(`${BASE_URL}/delete-notes/${id}`)
+        .delete(`${BASE_URL}delete-notes/${id}`)
         .then(() => getNotes())
         .catch((error) => console.log(error));
     });
